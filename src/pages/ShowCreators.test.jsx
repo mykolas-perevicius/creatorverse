@@ -1,9 +1,10 @@
-﻿import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+﻿import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ShowCreators from './ShowCreators';
 import { mockCreators } from '../client';
 
+// Mock the supabase client
 vi.mock('../client', () => ({
   supabase: {
     from: vi.fn(() => ({
@@ -11,8 +12,8 @@ vi.mock('../client', () => ({
     }))
   },
   mockCreators: [
-    { id: 1, name: "Tech Guru" },
-    { id: 2, name: "Cooking Master" }
+    { id: 1, name: "Tech Guru", url: "https://techguru.com", description: "All about tech" },
+    { id: 2, name: "Cooking Master", url: "https://cookingmaster.com", description: "Delicious recipes" }
   ]
 }));
 
@@ -24,9 +25,10 @@ describe('ShowCreators', () => {
       </Router>
     );
     
-    for (const creator of mockCreators) {
-      const creatorName = await screen.findByText(creator.name);
-      expect(creatorName).toBeInTheDocument();
-    }
+    await waitFor(() => {
+      mockCreators.forEach(creator => {
+        expect(screen.getByText(creator.name)).toBeInTheDocument();
+      });
+    });
   });
 });
