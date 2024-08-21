@@ -1,29 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 const CreatorCard = ({ creator }) => {
   return (
-    <div className="creator-card">
-      {creator.imageURL && (
-        <img src={creator.imageURL} alt={creator.name} className="creator-image" />
-      )}
-      <h2>{creator.name}</h2>
-      <p>{creator.description}</p>
-      <a href={creator.url} target="_blank" rel="noopener noreferrer">Visit Channel</a>
-      <Link to={`/view/${creator.id}`}>View Details</Link>
-    </div>
+    <article className="creator-card">
+      <div className="image-container">
+        {creator.imageURL && (
+          <img 
+            src={creator.imageURL} 
+            alt={creator.name} 
+          />
+        )}
+      </div>
+      <div className="content">
+        <h3>{creator.name}</h3>
+        <p className="description">{creator.description}</p>
+        <footer>
+          <a href={creator.url} target="_blank" rel="noopener noreferrer" role="button" className="secondary">Visit</a>
+          <Link to={`/view/${creator.id}`} role="button">View</Link>
+          <Link to={`/edit/${creator.id}`} role="button" className="contrast">Edit</Link>
+        </footer>
+      </div>
+    </article>
   );
-};
-
-CreatorCard.propTypes = {
-  creator: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    imageURL: PropTypes.string
-  }).isRequired
 };
 
 export default CreatorCard;
