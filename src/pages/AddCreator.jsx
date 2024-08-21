@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../client';
 
 const AddCreator = () => {
-  const [creator, setCreator] = useState({ name: '', url: '', description: '', imageURL: '' });
+  const [creator, setCreator] = useState({
+    name: '',
+    url: '',
+    description: '',
+    imageURL: ''
+  });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -12,26 +17,40 @@ const AddCreator = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitting new creator:', creator);
     const { data, error } = await supabase
       .from('creators')
       .insert([creator])
       .select();
-    if (error) console.log('error', error);
-    else {
-      console.log('New creator added successfully');
+
+    if (error) {
+      console.error('Error adding creator:', error);
+    } else {
       navigate('/');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="name" value={creator.name} onChange={handleChange} placeholder="Name" required />
-      <input name="url" value={creator.url} onChange={handleChange} placeholder="URL" required />
-      <textarea name="description" value={creator.description} onChange={handleChange} placeholder="Description" required />
-      <input name="imageURL" value={creator.imageURL} onChange={handleChange} placeholder="Image URL" />
-      <button type="submit">Add Creator</button>
-    </form>
+    <main className="container">
+      <h1>Add New Creator</h1>
+      <form onSubmit={handleSubmit} className="creator-form">
+        <label htmlFor="name">Name</label>
+        <input id="name" name="name" value={creator.name} onChange={handleChange} required />
+        
+        <label htmlFor="url">URL</label>
+        <input id="url" name="url" value={creator.url} onChange={handleChange} required />
+        
+        <label htmlFor="description">Description</label>
+        <textarea id="description" name="description" value={creator.description} onChange={handleChange} required />
+        
+        <label htmlFor="imageURL">Image URL</label>
+        <input id="imageURL" name="imageURL" value={creator.imageURL} onChange={handleChange} />
+        
+        <div className="button-group">
+          <button type="submit">Add Creator</button>
+          <Link to="/" role="button" className="contrast">Cancel</Link>
+        </div>
+      </form>
+    </main>
   );
 };
 
