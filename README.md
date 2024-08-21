@@ -46,7 +46,7 @@ GIF created with LICECAP
 
 ## Notes
 
-The hardest part was choosing the color pallete for the frontend!
+The hardest part was styling the frontend!
 
 ## License
 
