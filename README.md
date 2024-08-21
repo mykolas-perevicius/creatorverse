@@ -27,7 +27,7 @@ The following **optional** features are implemented:
 - [X] The content creator items are displayed in a creative format, like cards instead of a list
 - [X] An image of each content creator is shown on their content creator card
 
-## Video Walkthrough
+## Walkthrough
 
 Here's a walkthrough of implemented required features:
 
