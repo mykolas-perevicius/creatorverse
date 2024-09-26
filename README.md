@@ -33,6 +33,7 @@ Here's a walkthrough of implemented required features:
 
 [<img src='https://imgur.com/gallery/web103-De3xoKg' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 ](https://imgur.com/gallery/web103-De3xoKg)
+![](https://github.com/mykolas-perevicius/creatorverse/blob/main/web103-prework-walkthrough-mykolas-perevicius.gif)
 
 
 <!-- Replace this with whatever GIF tool you used! -->
